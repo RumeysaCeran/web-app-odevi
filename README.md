@@ -90,7 +90,6 @@ web-app-odevi/
 │   ├── preprocess.py    # Özellik vektörü oluşturma
 │   └── schemas.py       # Pydantic istek/yanıt modelleri
 ├── models2/
-│   ├── 09-WebAppOdeviModel.ipynb
 │   └── predictive_maintenance_classification_model.pth
 ├── static/              # CSS ve JavaScript
 ├── templates/           # HTML şablonları
