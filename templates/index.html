@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictive Maintenance — Arıza Tahmini</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="bg-pattern"></div>
+
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <span class="logo-icon">⚙</span>
+                <div>
+                    <h1>Predictive Maintenance</h1>
+                    <p>Makine arıza türü sınıflandırma</p>
+                </div>
+            </div>
+            <span class="badge">PyTorch · FastAPI</span>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="card form-card">
+            <h2>Sensör Verileri</h2>
+            <p class="subtitle">6 özelliği girin; model arıza türünü tahmin etsin.</p>
+
+            <form id="predictForm" novalidate>
+                <div class="form-grid">
+                    <div class="field field-full">
+                        <label for="product_quality">Ürün Kalitesi (Type)</label>
+                        <select id="product_quality" name="product_quality" required>
+                            <option value="">Seçiniz</option>
+                            <option value="L">L — Düşük kalite</option>
+                            <option value="M">M — Orta kalite</option>
+                            <option value="H">H — Yüksek kalite</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="air_temperature">Hava Sıcaklığı [K]</label>
+                        <input type="number" id="air_temperature" name="air_temperature" step="any" placeholder="örn. 298.1" required>
+                    </div>
+                    <div class="field">
+                        <label for="process_temperature">Proses Sıcaklığı [K]</label>
+                        <input type="number" id="process_temperature" name="process_temperature" step="any" placeholder="örn. 308.6" required>
+                    </div>
+                    <div class="field">
+                        <label for="rotational_speed">Devir Hızı [rpm]</label>
+                        <input type="number" id="rotational_speed" name="rotational_speed" step="any" placeholder="örn. 1551" required>
+                    </div>
+                    <div class="field">
+                        <label for="torque">Tork [Nm]</label>
+                        <input type="number" id="torque" name="torque" step="any" placeholder="örn. 42.8" required>
+                    </div>
+                    <div class="field">
+                        <label for="tool_wear">Takım Aşınması [min]</label>
+                        <input type="number" id="tool_wear" name="tool_wear" step="any" placeholder="örn. 0" required>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="fillSample" class="btn btn-secondary">Örnek Veri Doldur</button>
+                    <button type="submit" id="submitBtn" class="btn btn-primary">
+                        <span class="btn-text">Tahmin Et</span>
+                        <span class="spinner hidden"></span>
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section class="card result-card hidden" id="resultCard">
+            <h2>Tahmin Sonucu</h2>
+            <div id="resultContent"></div>
+        </section>
+
+        <section class="card info-card">
+            <h3>Olası Sınıflar</h3>
+            <ul class="class-list">
+                {% for label in class_labels %}
+                <li>{{ label }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Machine Predictive Maintenance Dataset · Derin Öğrenme Ödevi</p>
+        <p>Eğitim amaçlı geliştirilmiş bir modeldir, hata yapabilir.</p>
+    </footer>
+
+    <script src="/static/js/app.js?v=3"></script>
+</body>
+</html>
